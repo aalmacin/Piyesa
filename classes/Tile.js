@@ -6,13 +6,13 @@ var Tile = function(color, x, y, xLine, yLine) {
   this.y = y;
   this.xLine = xLine;
   this.yLine = yLine;
-  //this.rotate = false;
+  this.rotate = false;
   this.init();
 }
 
 // Static Variables/Constants
-Tile.TILE_WIDTH = 100;
-Tile.TILE_HEIGHT = 100;
+Tile.TILE_WIDTH = 50;
+Tile.TILE_HEIGHT = 50;
 Tile.OPACITY = 0.4;
 
 var p = Tile.prototype = new createjs.Shape();
@@ -24,22 +24,18 @@ p.init = function() {
   this.addEventListener("tick", this.handleTick);
 }
 
-/*
 p.getRotate = function() {
   return this.rotate;
 }
-*/
 
 // Event Listeners
 p.handleClick = function(e) {
-  //e.target.rotate = !e.target.rotate;
+  e.target.rotate = !e.target.rotate;
 }
 p.handleTick = function(e) {
-  /*
   if (e.currentTarget.getRotate()) {
     e.currentTarget.rotation += 1;
     e.currentTarget.regX = Tile.TILE_WIDTH / 2;
     e.currentTarget.regY = Tile.TILE_HEIGHT / 2;
   }
-  */
 }

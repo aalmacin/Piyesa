@@ -8,6 +8,8 @@ $(document).ready(function() {
 
   // Create the board object and add it to the Canvas
   var board = new Board();
+  board.x = 300;
+  board.y = 300;
   stage.addChild(board);
 
   // Event Listener that updates the stage all the time
