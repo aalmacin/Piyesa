@@ -6,7 +6,7 @@ var Board = function() {
 }
 
 // Static Variables/Constants
-Board.TILE_COUNT = 120;
+Board.TILE_COUNT = 500;
 Board.TILE_HORIZONTAL_COUNT = 10;
 Board.TILE_VERTICAL_COUNT = 12;
 Board.COLOR_1 = "25,33,177";
@@ -40,9 +40,21 @@ p.init = function() {
       color = (i % 2 == 0) ? Board.COLOR_7 : Board.COLOR_6;
     }
     tile_x = (tile_x_counter * (Tile.TILE_WIDTH / 2)) - Tile.TILE_WIDTH;
-    var tile = new Tile(color, tile_x, tile_y, tile_x_counter, tile_rows);
+    var tile = new Tile(color,  Math.random() * 1300,  Math.random() * 1300, tile_x_counter, tile_rows, true, 1.1);
     this.addChild(tile);
     tile_x_counter++;
+  }
+  for (var i=0; i < 200; i++) {
+    var color = (i % 2 == 0) ? Board.COLOR_4 : Board.COLOR_3;
+    this.addChild(new Tile(color, Math.random() * 1300, Math.random() * 1300, 1, 1, true, 1));
+  }
+  for (var i=0; i < 300; i++) {
+    var color = (i % 2 == 0) ? Board.COLOR_7 : Board.COLOR_6;
+    this.addChild(new Tile(color, Math.random() * 1300, Math.random() * 1300, 1, 1, true, .1));
+  }
+  for (var i=0; i < 300; i++) {
+    var color = (i % 2 == 0) ? Board.COLOR_7 : Board.COLOR_6;
+    this.addChild(new Tile(color, Math.random() * 1300, Math.random() * 1300, 1, 1, true, 1));
   }
   this.addEventListener("click", this.handleClick);
 }

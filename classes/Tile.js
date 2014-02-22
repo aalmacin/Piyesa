@@ -1,12 +1,21 @@
 // Constructor
-var Tile = function(color, x, y, xLine, yLine) {
+var Tile = function(color, x, y, xLine, yLine, rotate, speed) {
   createjs.Shape.call(this);
   this.color = color;
   this.x = x;
   this.y = y;
+  this.regX = Math.random() * 1300;
+  this.regY = Math.random() * 1300;
   this.xLine = xLine;
   this.yLine = yLine;
-  this.rotate = false;
+  this.rotate = rotate;
+  if (!this.rotate) {
+    this.size = 3;
+  }
+  this.rotateSpeed = speed;
+  if (Math.random() > 0.4) {
+    this.rotateSpeed = 0 - this.rotateSpeed;
+  }
   this.init();
 }
 
@@ -19,7 +28,15 @@ var p = Tile.prototype = new createjs.Shape();
 
 // Methods
 p.init = function() {
-  this.graphics.beginFill("rgba(" + this.color + ", " + Tile.OPACITY + ")").drawRect(this.x, this.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+  var mRand = Math.random();
+  if (this.size) {
+    this.graphics.beginFill("rgba(" + this.color + ", " + Tile.OPACITY + ")").drawCircle(this.x, this.y, this.size);
+  } else if (mRand > .9) {
+    this.graphics.beginFill("rgba(" + this.color + ", " + Tile.OPACITY + ")").drawCircle(this.x, this.y, (Math.random() * 40));
+  } else {
+    this.graphics.beginFill("rgba(" + this.color + ", " + Tile.OPACITY + ")").drawPolyStar(this.x, this.y, Math.round(Math.random() * 50), Math.round(Math.random() * 10), Math.random(), Math.random() * 360);
+    //.drawPolyStar(this.x, this.y, (Math.random() * 40, Math.random * 8, Math.random(), Math.random() * 360));
+  }
   this.addEventListener("click", this.handleClick);
   this.addEventListener("tick", this.handleTick);
 }
@@ -34,8 +51,6 @@ p.handleClick = function(e) {
 }
 p.handleTick = function(e) {
   if (e.currentTarget.getRotate()) {
-    e.currentTarget.rotation += 1;
-    e.currentTarget.regX = Tile.TILE_WIDTH / 2;
-    e.currentTarget.regY = Tile.TILE_HEIGHT / 2;
+    e.currentTarget.rotation += e.currentTarget.rotateSpeed;
   }
 }
