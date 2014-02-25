@@ -2,6 +2,7 @@
 var Board = function() {
   createjs.Container.call(this);
   //this.rotate = false;
+  this.tiles = new Array();
   this.init();
 }
 
@@ -41,6 +42,7 @@ p.init = function() {
     }
     tile_x = (tile_x_counter * (Tile.TILE_WIDTH / 2)) - Tile.TILE_WIDTH;
     var tile = new Tile(color, tile_x, tile_y, tile_x_counter, tile_rows);
+    this.tiles.push(tile);
     this.addChild(tile);
     tile_x_counter++;
   }
