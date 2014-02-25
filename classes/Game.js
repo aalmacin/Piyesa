@@ -11,6 +11,8 @@ Game.prototype.initialize = function(canvasName) {
 
   // Create the board object and add it to the Canvas
   this.board = new Board();
+  this.board.x = 400;
+  this.board.y = 400;
   this.addChild(this.board);
 
   this.piece = new Assault(this.board, 1, 1);
