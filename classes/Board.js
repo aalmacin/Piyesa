@@ -1,9 +1,6 @@
 // Constructor
 var Board = function() {
-  createjs.Container.call(this);
-  //this.rotate = false;
-  this.tiles = new Array();
-  this.init();
+  this.initialize();
 }
 
 // Static Variables/Constants
@@ -20,8 +17,12 @@ Board.COLOR_7 = "200,200,200";
 
 var p = Board.prototype = new createjs.Container;
 
+Board.prototype.Container_initialize = p.initialize;
+
 // Methods
-p.init = function() {
+Board.prototype.initialize = function() {
+  this.Container_initialize();
+  this.tiles = new Array();
   for (var tile_x_counter=1, tile_rows=0, tile_y=0, tile_x=0, i=0; i < Board.TILE_COUNT; i++) {
     var color;
     if ( i % Board.TILE_HORIZONTAL_COUNT == 0) {
@@ -46,16 +47,4 @@ p.init = function() {
     this.addChild(tile);
     tile_x_counter++;
   }
-  this.addEventListener("click", this.handleClick);
-}
-
-/*
-p.getRotate = function() {
-  return this.rotate;
-}
-*/
-
-// Event Listeners
-p.handleClick = function(e) {
-  //e.target.parent.rotate = !e.target.parent.rotate;
 }
