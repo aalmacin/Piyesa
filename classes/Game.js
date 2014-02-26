@@ -15,6 +15,8 @@ Game.PLAYERS = 2;
 Game.prototype.initialize = function(canvasName) {
   this.Stage_initialize(canvasName);
 
+  this.autoClear = true;
+
   // Create the board object and add it to the Canvas
   this.board = new Board();
   this.board.x = 400;

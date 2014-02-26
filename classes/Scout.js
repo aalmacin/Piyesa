@@ -18,3 +18,22 @@ Scout.prototype.initialize = function(playerNum, xLine, yLine) {
   this.Piece_initialize(color, xLine, yLine, Scout.RADIUS, Scout.SIDES, Scout.POINT_SIZE, objRotation);
 }
 
+Scout.prototype.handleClick = function(e) {
+  var tile = e.target.tile;
+  var board = tile.parent;
+  for(var i=0; i < board.tiles.length; i++){
+    var currTile = board.tiles[i];
+    if (currTile.highlighted) {
+      currTile.unhighlightTile();
+    }
+    var left = (tile.xLine - 1 == currTile.xLine && tile.yLine == currTile.yLine);
+    var right = (tile.xLine + 1 == currTile.xLine && tile.yLine == currTile.yLine);
+    var above = (tile.yLine - 1 == currTile.yLine && tile.xLine == currTile.xLine);
+    var below = (tile.yLine + 1 == currTile.yLine && tile.xLine == currTile.xLine);
+    if(left || right || above || below) {
+      if(currTile.piece == null) {
+        currTile.highlightTile();
+      }
+    }
+  }
+}

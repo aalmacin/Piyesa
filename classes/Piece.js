@@ -22,10 +22,14 @@ Piece.prototype.initialize = function(color, xLine, yLine, radius, sides, pointS
   this.tile = null;
 
   this.graphics.beginFill("rgb(" + this.color + ")").drawPolyStar(this.x, this.y, this.radius, this.sides, this.pointSize, this.objRotate);
+  this.addEventListener("click", this.handleClick);
 }
 
 Piece.prototype.setTile = function(tile) {
   this.tile = tile;
   this.x = this.tile.x + Tile.TILE_WIDTH / 2;
   this.y = this.tile.y + Tile.TILE_HEIGHT / 2;
+}
+
+Piece.prototype.handleClick = function(e) {
 }
