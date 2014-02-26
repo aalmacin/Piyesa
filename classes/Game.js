@@ -5,6 +5,12 @@ var Game = function(canvasName) {
 var p = Game.prototype = new createjs.Stage();
 
 Game.prototype.Stage_initialize = p.initialize;
+Game.SCOUT_COUNT = 8;
+Game.ROVER_COUNT = 4;
+Game.WARDEN_COUNT = 2;
+Game.ASSAULT_COUNT = 1;
+Game.DEFENDER_COUNT = 1;
+Game.PLAYERS = 2;
 
 Game.prototype.initialize = function(canvasName) {
   this.Stage_initialize(canvasName);
@@ -15,24 +21,30 @@ Game.prototype.initialize = function(canvasName) {
   this.board.y = 100;
   this.addChild(this.board);
 
-  this.pieces = new Array(
-    new Assault(1, 2, 4),
-    new Assault(1, 3, 4),
-    new Assault(1, 4, 4),
-    new Assault(1, 5, 4),
-    new Assault(1, 6, 4),
-    new Assault(1, 7, 4),
-    new Assault(1, 8, 4),
-    new Assault(1, 9, 4),
-    new Assault(2, 2, 9),
-    new Assault(2, 3, 9),
-    new Assault(2, 4, 9),
-    new Assault(2, 5, 9),
-    new Assault(2, 6, 9),
-    new Assault(2, 7, 9),
-    new Assault(2, 8, 9),
-    new Assault(2, 9, 9)
-  );
+  this.pieces = new Array();
+
+  for(var i=1; i <= Game.PLAYERS; i++) {
+    for(var j=0; j < Game.SCOUT_COUNT; j++) {
+      var yPos = (i == Game.PLAYERS) ? 8 : 5;
+      this.pieces.push(new Scout(i, j + 2, yPos));
+    }
+    for(var j=0; j < Game.ROVER_COUNT; j++) {
+      var yPos = (i == Game.PLAYERS) ? 9 : 4;
+      this.pieces.push(new Rover(i, j + 4, yPos));
+    }
+    for(var j=0; j < Game.WARDEN_COUNT; j++) {
+      var yPos = (i == Game.PLAYERS) ? 10 : 3;
+      this.pieces.push(new Warden(i, j + 6, yPos));
+    }
+    for(var j=0; j < Game.ASSAULT_COUNT; j++) {
+      var yPos = (i == Game.PLAYERS) ? 11 : 2;
+      this.pieces.push(new Assault(i, j + 3, yPos));
+    }
+    for(var j=0; j < Game.DEFENDER_COUNT; j++) {
+      var yPos = (i == Game.PLAYERS) ? 12 : 1;
+      this.pieces.push(new Defender(i, j + 7, yPos));
+    }
+  }
 
   for(var i=0; i < this.pieces.length; i++) {
     for(var j=0; j < this.board.tiles.length; j++) {

@@ -1,12 +1,13 @@
-var Piece = function(color, xLine, yLine, radius, sides, pointSize) {
-  this.initialize(color, xLine, yLine, radius, sides, pointSize);
+var Piece = function(color, xLine, yLine, radius, sides, pointSize, objRotate) {
+  objRotate = typeof objRotate !== 'undefined' ? objRotate : 0;
+  this.initialize(color, xLine, yLine, radius, sides, pointSize, objRotate);
 }
 
 var p = Piece.prototype = new createjs.Shape();
 
 Piece.prototype.Shape_initialize = p.initialize;
 
-Piece.prototype.initialize = function(color, xLine, yLine, radius, sides, pointSize) {
+Piece.prototype.initialize = function(color, xLine, yLine, radius, sides, pointSize, objRotate) {
   this.Shape_initialize();
   this.color = color;
   this.xLine = xLine;
@@ -14,12 +15,13 @@ Piece.prototype.initialize = function(color, xLine, yLine, radius, sides, pointS
   this.radius = radius;
   this.sides = sides;
   this.pointSize = pointSize;
+  this.objRotate = objRotate;
 
   this.x = 0;
   this.y = 0;
   this.tile = null;
 
-  this.graphics.beginFill("rgb(" + this.color + ")").drawPolyStar(this.x, this.y, this.radius, this.sides, this.pointSize, 0);
+  this.graphics.beginFill("rgb(" + this.color + ")").drawPolyStar(this.x, this.y, this.radius, this.sides, this.pointSize, this.objRotate);
 }
 
 Piece.prototype.setTile = function(tile) {
