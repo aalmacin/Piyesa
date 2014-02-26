@@ -1,14 +1,13 @@
-var Piece = function(board, color, xLine, yLine, radius, sides, pointSize) {
-  this.initialize(board, color, xLine, yLine, radius, sides, pointSize);
+var Piece = function(color, xLine, yLine, radius, sides, pointSize) {
+  this.initialize(color, xLine, yLine, radius, sides, pointSize);
 }
 
 var p = Piece.prototype = new createjs.Shape();
 
 Piece.prototype.Shape_initialize = p.initialize;
 
-Piece.prototype.initialize = function(board, color, xLine, yLine, radius, sides, pointSize) {
+Piece.prototype.initialize = function(color, xLine, yLine, radius, sides, pointSize) {
   this.Shape_initialize();
-  this.board = board;
   this.color = color;
   this.xLine = xLine;
   this.yLine = yLine;
@@ -18,16 +17,13 @@ Piece.prototype.initialize = function(board, color, xLine, yLine, radius, sides,
 
   this.x = 0;
   this.y = 0;
-  this.setPosition(xLine, yLine);
+  this.tile = null;
+
+  this.graphics.beginFill("rgb(" + this.color + ")").drawPolyStar(this.x, this.y, this.radius, this.sides, this.pointSize, 0);
 }
 
-Piece.prototype.setPosition = function(xLine, yLine) {
-  if (this.board != undefined) {
-    var tiles = this.board.tiles;
-    for(var i=0; i < tiles.length; i++) {
-      if (tiles[i].xLine == xLine && tiles[i].yLine == yLine) {
-        this.graphics.beginFill("rgb(" + this.color + ")").drawPolyStar(tiles[i].x, tiles[i].y, this.radius, this.sides, this.pointSize, 0);
-      }
-    }
-  }
+Piece.prototype.setTile = function(tile) {
+  this.tile = tile;
+  this.x = this.tile.x + Tile.TILE_WIDTH / 2;
+  this.y = this.tile.y + Tile.TILE_HEIGHT / 2;
 }
