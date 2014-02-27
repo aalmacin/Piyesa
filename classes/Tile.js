@@ -23,11 +23,15 @@ Tile.prototype.initialize = function(color, x, y, xLine, yLine) {
   this.yLine = yLine;
   this.piece = null;
   this.drawGFX(this.color, true);
-  this.highlighted = false;
+  this.highlighted = null;
+  this.addEventListener("click", this.handleClick);
 }
 
 Tile.prototype.setPiece = function(piece) {
+  this.removeChild(this.piece);
   this.piece = piece;
+  this.piece.xLine = this.xLine;
+  this.piece.yLine = this.yLine;
   this.addChild(this.piece);
 }
 
@@ -53,4 +57,21 @@ Tile.prototype.drawGFX = function(color, original) {
   }
   this.addChild(this.shape);
   this.addChild(this.piece);
+}
+
+Tile.prototype.handleClick = function(e) {
+  var me = e.currentTarget;
+  var pc = me.parent.clickedPiece;
+  if(me.highlighted == true) {
+    me.parent.unhighlightAllTiles();
+    pc.tile.removePiece();
+    pc.removeTile();
+    me.setPiece(pc);
+    pc.setTile(me);
+  }
+}
+
+Tile.prototype.removePiece = function() {
+  this.removeChild(this.piece);
+  this.piece = null;
 }

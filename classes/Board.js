@@ -23,6 +23,7 @@ Board.prototype.Container_initialize = p.initialize;
 Board.prototype.initialize = function() {
   this.Container_initialize();
   this.tiles = new Array();
+  this.clickedPiece = null;
   for (var tile_x_counter=1, tile_rows=0, tile_y=0, tile_x=0, i=0; i < Board.TILE_COUNT; i++) {
     var color;
     if ( i % Board.TILE_HORIZONTAL_COUNT == 0) {
@@ -46,5 +47,11 @@ Board.prototype.initialize = function() {
     this.tiles.push(tile);
     this.addChild(tile);
     tile_x_counter++;
+  }
+}
+
+Board.prototype.unhighlightAllTiles = function() {
+  for(var i=0; i < this.tiles.length; i++){
+    this.tiles[i].unhighlightTile();
   }
 }

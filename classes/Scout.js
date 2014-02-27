@@ -21,6 +21,7 @@ Scout.prototype.initialize = function(playerNum, xLine, yLine) {
 Scout.prototype.handleClick = function(e) {
   var tile = e.target.tile;
   var board = tile.parent;
+  board.clickedPiece = tile.piece;
   for(var i=0; i < board.tiles.length; i++){
     var currTile = board.tiles[i];
     if (currTile.highlighted) {

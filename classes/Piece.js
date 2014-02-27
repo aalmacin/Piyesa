@@ -31,5 +31,9 @@ Piece.prototype.setTile = function(tile) {
   this.y = this.tile.y + Tile.TILE_HEIGHT / 2;
 }
 
+Piece.prototype.removeTile = function() {
+  this.tile = null;
+}
+
 Piece.prototype.handleClick = function(e) {
 }
