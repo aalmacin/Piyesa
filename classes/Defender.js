@@ -17,3 +17,20 @@ Defender.prototype.initialize = function(playerNum, xLine, yLine) {
   this.Piece_initialize(color, xLine, yLine, Defender.RADIUS, Defender.SIDES, Defender.POINT_SIZE);
 }
 
+Defender.prototype.handleClick = function(e) {
+  var tile = e.target.tile;
+  var board = tile.parent;
+  board.clickedPiece = tile.piece;
+  for(var i=0; i < board.tiles.length; i++){
+    var currTile = board.tiles[i];
+    if (currTile.highlighted) {
+      currTile.unhighlightTile();
+    }
+    var ew = (tile.xLine <= currTile.xLine + 3 && tile.xLine >= currTile.xLine - 3 && tile.yLine == currTile.yLine);
+    if(ew) {
+      if(currTile.piece == null) {
+        currTile.highlightTile();
+      }
+    }
+  }
+}
