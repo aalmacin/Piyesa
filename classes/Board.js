@@ -55,3 +55,16 @@ Board.prototype.unhighlightAllTiles = function() {
     this.tiles[i].unhighlightTile();
   }
 }
+
+Board.prototype.getTileByLine = function(xLine, yLine) {
+  var tile = null;
+  var i = 0;
+  while(tile == null) {
+    var currTile = this.tiles[i];
+    if (currTile.xLine == xLine && currTile.yLine == yLine) {
+      tile = currTile;
+    }
+    i++;
+  }
+  return tile;
+}
