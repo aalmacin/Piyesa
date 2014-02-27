@@ -7,6 +7,7 @@ var Tile = function(color, x, y, xLine, yLine) {
 Tile.TILE_WIDTH = 100;
 Tile.TILE_HEIGHT = 100;
 Tile.OPACITY = 0.4;
+Tile.HIGHLIGHT_OPACITY = 0.3;
 Tile.HIGHLIGHT_COLOR = "205, 92, 92";
 
 var p = Tile.prototype = new createjs.Container();
@@ -53,7 +54,8 @@ Tile.prototype.drawGFX = function(color, original) {
   if(original) {
     this.shape.graphics.beginFill("rgba(" + this.color + ", " + Tile.OPACITY + ")").drawRect(this.x, this.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
   } else {
-    this.shape.graphics.beginFill("rgba(" + color + ", " + Tile.OPACITY + ")").drawRect(this.x, this.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+    this.shape.graphics.beginFill("rgba(" + this.color + ", " + Tile.OPACITY + ")").drawRect(this.x, this.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+    this.shape.graphics.beginFill("rgba(" + color + ", " + Tile.HIGHLIGHT_OPACITY + ")").drawRect(this.x, this.y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
   }
   this.addChild(this.shape);
   this.addChild(this.piece);

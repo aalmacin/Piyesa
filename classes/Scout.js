@@ -27,11 +27,11 @@ Scout.prototype.handleClick = function(e) {
     if (currTile.highlighted) {
       currTile.unhighlightTile();
     }
-    var left = (tile.xLine - 1 == currTile.xLine && tile.yLine == currTile.yLine);
-    var right = (tile.xLine + 1 == currTile.xLine && tile.yLine == currTile.yLine);
-    var above = (tile.yLine - 1 == currTile.yLine && tile.xLine == currTile.xLine);
-    var below = (tile.yLine + 1 == currTile.yLine && tile.xLine == currTile.xLine);
-    if(left || right || above || below) {
+    var w = (tile.xLine - 1 == currTile.xLine && tile.yLine == currTile.yLine);
+    var e = (tile.xLine + 1 == currTile.xLine && tile.yLine == currTile.yLine);
+    var n = (tile.yLine - 1 == currTile.yLine && tile.xLine == currTile.xLine);
+    var s = (tile.yLine + 1 == currTile.yLine && tile.xLine == currTile.xLine);
+    if(w || e || n || s) {
       if(currTile.piece == null) {
         currTile.highlightTile();
       }
