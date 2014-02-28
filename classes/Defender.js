@@ -30,7 +30,7 @@ Defender.prototype.handleClick = function(e) {
       }
       var ew = (tile.xLine <= currTile.xLine + 3 && tile.xLine >= currTile.xLine - 3 && tile.yLine == currTile.yLine);
       if(ew) {
-        if(currTile.piece == null) {
+        if(currTile.piece == null || (currTile.piece != null && board.getStage().player1turn && currTile.piece.playerNum == 2) || (currTile.piece != null && !board.getStage().player1turn && currTile.piece.playerNum == 1)) {
           currTile.highlightTile();
         }
       }

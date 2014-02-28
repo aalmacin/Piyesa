@@ -34,7 +34,7 @@ Scout.prototype.handleClick = function(e) {
       var n = (tile.yLine - 1 == currTile.yLine && tile.xLine == currTile.xLine);
       var s = (tile.yLine + 1 == currTile.yLine && tile.xLine == currTile.xLine);
       if(w || e || n || s) {
-        if(currTile.piece == null) {
+        if(currTile.piece == null || (currTile.piece != null && board.getStage().player1turn && currTile.piece.playerNum == 2) || (currTile.piece != null && !board.getStage().player1turn && currTile.piece.playerNum == 1)) {
           currTile.highlightTile();
         }
       }

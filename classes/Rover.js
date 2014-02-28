@@ -34,7 +34,7 @@ Rover.prototype.handleClick = function(e) {
       var ne = (tile.xLine + 1 == currTile.xLine && tile.yLine - 1 == currTile.yLine);
       var se = (tile.xLine + 1 == currTile.xLine && tile.yLine + 1 == currTile.yLine);
       if(nw || ne || sw || se) {
-        if(currTile.piece == null) {
+        if(currTile.piece == null || (currTile.piece != null && board.getStage().player1turn && currTile.piece.playerNum == 2) || (currTile.piece != null && !board.getStage().player1turn && currTile.piece.playerNum == 1)) {
           currTile.highlightTile();
         }
       }

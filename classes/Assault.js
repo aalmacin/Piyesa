@@ -69,7 +69,7 @@ Assault.prototype.handleClick = function(e) {
       var ne_double = (tile.xLine + 2 == currTile.xLine && net && tile.yLine - 2 == currTile.yLine);
       var se_double = (tile.xLine + 2 == currTile.xLine && set && tile.yLine + 2 == currTile.yLine);
       if(w || e || n || s || w_double || e_double || n_double || s_double || nw || sw || ne || se || nw_double || sw_double || ne_double || se_double) {
-        if(currTile.piece == null) {
+        if(currTile.piece == null || (currTile.piece != null && board.getStage().player1turn && currTile.piece.playerNum == 2) || (currTile.piece != null && !board.getStage().player1turn && currTile.piece.playerNum == 1)) {
           currTile.highlightTile();
         }
       }
