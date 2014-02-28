@@ -17,6 +17,9 @@ Game.prototype.initialize = function(canvasName) {
 
   this.autoClear = true;
 
+  // Create players
+  this.player1turn = true;
+
   // Create the board object and add it to the Canvas
   this.board = new Board();
   this.board.x = 400;
@@ -58,4 +61,8 @@ Game.prototype.initialize = function(canvasName) {
       }
     }
   }
+}
+
+Game.prototype.changeTurn = function() {
+  this.player1turn = !this.player1turn;
 }

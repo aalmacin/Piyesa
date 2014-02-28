@@ -18,18 +18,21 @@ Defender.prototype.initialize = function(playerNum, xLine, yLine) {
 }
 
 Defender.prototype.handleClick = function(e) {
-  var tile = e.target.tile;
+  var piece = e.target;
+  var tile = piece.tile;
   var board = tile.parent;
-  board.clickedPiece = tile.piece;
-  for(var i=0; i < board.tiles.length; i++){
-    var currTile = board.tiles[i];
-    if (currTile.highlighted) {
-      currTile.unhighlightTile();
-    }
-    var ew = (tile.xLine <= currTile.xLine + 3 && tile.xLine >= currTile.xLine - 3 && tile.yLine == currTile.yLine);
-    if(ew) {
-      if(currTile.piece == null) {
-        currTile.highlightTile();
+  if((board.getStage().player1turn && piece.playerNum == 1) || (!board.getStage().player1turn && piece.playerNum == 2)) {
+    board.clickedPiece = tile.piece;
+    for(var i=0; i < board.tiles.length; i++){
+      var currTile = board.tiles[i];
+      if (currTile.highlighted) {
+        currTile.unhighlightTile();
+      }
+      var ew = (tile.xLine <= currTile.xLine + 3 && tile.xLine >= currTile.xLine - 3 && tile.yLine == currTile.yLine);
+      if(ew) {
+        if(currTile.piece == null) {
+          currTile.highlightTile();
+        }
       }
     }
   }

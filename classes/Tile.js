@@ -70,6 +70,7 @@ Tile.prototype.handleClick = function(e) {
     pc.removeTile();
     me.setPiece(pc);
     pc.setTile(me);
+    me.getStage().changeTurn();
   }
 }
 
